@@ -150,6 +150,9 @@ function initializeApp() {
     // Set up event listeners
     setupEventListeners();
 
+    // Initialize additional interactions
+    initializeAdditionalInteractions();
+
     // Show welcome section
     showSection('welcome');
 
@@ -157,6 +160,21 @@ function initializeApp() {
     setTimeout(() => {
         startRandomKissAnimations();
     }, 5000);
+
+    // Start floating love messages
+    setTimeout(() => {
+        startFloatingLoveMessages();
+    }, 8000);
+
+    // Start surprise emojis
+    setTimeout(() => {
+        startSurpriseEmojis();
+    }, 12000);
+
+    // Enable particle trails
+    setTimeout(() => {
+        enableParticleTrails();
+    }, 15000);
 }
 
 function setupEventListeners() {
