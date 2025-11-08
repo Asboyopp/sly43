@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Dearest Slyy 💕</title>
+    <meta name="description" content="A special surprise for my honeybunch sugarplumplumumpkinpielemonsweetheartlovey">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Caveat&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Background Love Effects -->
+    <div class="love-background">
+        <div class="floating-hearts"></div>
+        <div class="sparkle-particles"></div>
+    </div>
+
+    <!-- Welcome Section -->
+    <section id="welcome" class="welcome-section">
+        <div class="welcome-content">
+            <h1 class="welcome-message">
+                How are you my<br>
+                <span class="romantic-nickname">honeybunch sugarplumplumumpkinpielemonsweetheartlovey?</span>
+            </h1>
+
+            <div class="name-display">
+                <h2 class="her-name">Slyy</h2>
+                <div class="name-sparkles"></div>
+            </div>
+
+            <div class="personalized-letter">
+                <p>Dear slyy,</p>
+                <p>You Are the sweetest, cutest, prettiest Girl I've Ever Met, I'm So excited to meet you in January in person and give you a hug 😭, Since I missed so much today I made this for you 😚, I loveeee Uuu😘 mwah!</p>
+            </div>
+
+            <button id="beginButton" class="begin-button">
+                <span class="button-text">Begin Your Love Story</span>
+                <div class="button-glow"></div>
+            </button>
+        </div>
+
+        <!-- Hidden audio element -->
+        <audio id="backgroundMusic" loop>
+            <source src="assets/song.mp3" type="audio/mpeg">
+            Your browser doesn't support audio.
+        </audio>
+    </section>
+
+    <!-- Love Reasons Section -->
+    <section id="loveReasons" class="love-reasons-section hidden">
+        <div class="section-header">
+            <h2>100+ Reasons I Love You</h2>
+            <p class="instruction">Tap any reason to watch it transform into hearts!</p>
+        </div>
+
+        <div class="reasons-container" id="reasonsContainer">
+            <!-- Reason cards will be dynamically inserted here -->
+        </div>
+
+        <div class="floating-hearts-overlay"></div>
+    </section>
+
+    <!-- Photo Gallery Section -->
+    <section id="photoGallery" class="photo-gallery-section hidden">
+        <div class="section-header">
+            <h2>Our Beautiful Memories</h2>
+            <p class="gallery-subtitle">Every moment with you is precious</p>
+        </div>
+
+        <div class="gallery-container">
+            <div class="photo-carousel" id="photoCarousel">
+                <!-- Images will be dynamically loaded here -->
+            </div>
+
+            <div class="gallery-controls">
+                <button class="gallery-nav prev" id="prevPhoto">❤️</button>
+                <button class="gallery-nav next" id="nextPhoto">💕</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mystery Box Section -->
+    <section id="mysterySection" class="mystery-section hidden">
+        <div class="section-header">
+            <h2>A Special Surprise Awaits...</h2>
+            <p class="mystery-hint">Something magical is waiting for you</p>
+        </div>
+
+        <div class="mystery-box-container">
+            <div class="mystery-box" id="mysteryBox">
+                <div class="box-lid">
+                    <div class="box-top">
+                        <span class="gift-ribbon">🎀</span>
+                    </div>
+                </div>
+                <div class="box-body">
+                    <span class="box-text">Tap for a surprise</span>
+                </div>
+            </div>
+
+            <div class="mystery-glow"></div>
+        </div>
+    </section>
+
+    <!-- Interactive Kiss Section -->
+    <section id="kissSection" class="kiss-section hidden">
+        <div class="section-header">
+            <h2>Leave Your Love Kisses</h2>
+            <p class="kiss-instruction">Tap anywhere on the screen to leave a kiss mark 😘</p>
+        </div>
+
+        <div class="kiss-canvas" id="kissCanvas">
+            <div class="kiss-instruction-overlay">
+                <span class="blow-kiss-text">Blow a kiss to the screen 💋</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Wedding Ring Surprise Modal -->
+    <div class="wedding-modal" id="weddingModal">
+        <div class="modal-content">
+            <div class="ring-container">
+                <div class="wedding-ring">💍</div>
+                <div class="ring-sparkles"></div>
+            </div>
+
+            <div class="countdown-text" id="countdownText">
+                <p>Maybe someday soon... ❤️</p>
+                <div class="countdown-timer" id="countdownTimer">3</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Oops Page -->
+    <div class="oops-page" id="oopsPage">
+        <div class="oops-content">
+            <h2 class="oops-title">Oops it's not for Now 😊</h2>
+            <p class="oops-message">But I promise you, someday it will be real 💕</p>
+            <p class="oops-subtitle">For now, let's just enjoy every moment together!</p>
+
+            <button class="return-button" id="returnButton">
+                Return to Our Love Story
+            </button>
+        </div>
+    </div>
+
+    <!-- Random Kiss Animations Container -->
+    <div class="random-kisses-container" id="randomKissesContainer"></div>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+</body>
+</html>
