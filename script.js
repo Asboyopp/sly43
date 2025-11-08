@@ -207,6 +207,15 @@ function setupEventListeners() {
 
     // Prevent scrolling on body when modal is active
     document.addEventListener('keydown', handleKeyPress);
+
+    // Add click interaction for heart rain
+    document.addEventListener('click', handleGlobalClick);
+
+    // Add double-click for easter egg
+    document.addEventListener('dblclick', handleDoubleClick);
+
+    // Add hover effects for interactive elements
+    addInteractiveHoverEffects();
 }
 
 function handleBeginButton() {
