@@ -172,10 +172,13 @@ sly43/
 
 ## ❤️ Personalization Tips
 
-1. **Photos**: Add your favorite memories together
-2. **Music**: Choose "your song" or something romantic
+1. **Photos**: Add your favorite memories together (img1.jpg, img2.jpg, etc.)
+2. **Music**: Choose "your song" or something romantic (song.mp3)
 3. **Timing**: Send it when she'll have time to explore everything
-4. **Surprise Element**: Don't tell her about the mystery box!
+4. **Surprise Element**: Don't tell her about the mystery box OR the easter egg!
+5. **Interactions**: Encourage her to click around and discover all the hidden effects
+6. **Easter Egg**: Don't tell her to double-click her name for the secret surprise!
+7. **Mobile Experience**: Remind her to use her phone for the best experience
 
 ## 🎯 Expected Reaction
 
