@@ -114,6 +114,28 @@ const loveReasons = [
     "You are my past, present, and future 🌟"
 ];
 
+// Global variables for additional interactions
+let floatingLoveMessages = [];
+let heartRainActive = false;
+let particleTrailActive = false;
+let surpriseEmojiInterval;
+let loveCounter = 0;
+let easterEggTriggered = false;
+
+// Romantic messages for floating animations
+const romanticMessages = [
+    "I love you Slyy! 💕",
+    "You're amazing! ✨",
+    "Perfect in every way 🌟",
+    "My heart beats for you 💓",
+    "Forever yours 💖",
+    "You make me smile 😊",
+    "So beautiful! 🥰",
+    "Can't stop thinking about you 💭",
+    "You're my everything 🌍",
+    "Love you more each day 📈"
+];
+
 // Initialize the application
 document.addEventListener('DOMContentLoaded', function() {
     initializeApp();
