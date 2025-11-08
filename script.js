@@ -961,6 +961,547 @@ window.addEventListener('error', (event) => {
     // Continue running app despite errors
 });
 
+// Initialize Additional Interactions
+function initializeAdditionalInteractions() {
+    loveCounter = 0;
+    easterEggTriggered = false;
+    heartRainActive = false;
+    particleTrailActive = false;
+}
+
+// Floating Love Messages
+function startFloatingLoveMessages() {
+    setInterval(() => {
+        if (currentSection !== 'welcome' && currentSection !== 'oopsPage' && floatingLoveMessages.length < 3) {
+            createFloatingLoveMessage();
+        }
+    }, 8000);
+}
+
+function createFloatingLoveMessage() {
+    const container = document.getElementById('randomKissesContainer');
+    if (!container) return;
+
+    const message = document.createElement('div');
+    message.className = 'floating-love-message';
+    message.textContent = romanticMessages[Math.floor(Math.random() * romanticMessages.length)];
+
+    // Random position
+    const x = Math.random() * (window.innerWidth - 200) + 100;
+    const y = window.innerHeight + 50;
+
+    message.style.left = x + 'px';
+    message.style.top = y + 'px';
+    message.style.position = 'fixed';
+    message.style.color = '#FFD700';
+    message.style.fontSize = '1.2rem';
+    message.style.fontWeight = 'bold';
+    message.style.textShadow = '2px 2px 4px rgba(0,0,0,0.5)';
+    message.style.pointerEvents = 'none';
+    message.style.zIndex = '60';
+    message.style.animation = 'floatUp 15s linear forwards';
+    message.style.whiteSpace = 'nowrap';
+
+    container.appendChild(message);
+
+    // Remove after animation
+    setTimeout(() => {
+        message.remove();
+    }, 15000);
+}
+
+// Surprise Emojis
+function startSurpriseEmojis() {
+    const surpriseEmojis = ['💕', '💖', '💗', '💝', '💓', '💞', '💘', '❤️', '🧡', '💛', '💚', '💙', '💜', '🤍', '🤎', '💋', '🌹', '✨', '🌟', '💫', '⭐', '🥰', '😍', '🤩', '😘', '💏', '👩‍❤️‍💋‍👨'];
+
+    surpriseEmojiInterval = setInterval(() => {
+        if (currentSection !== 'oopsPage') {
+            createSurpriseEmoji(surpriseEmojis);
+        }
+    }, 6000);
+}
+
+function createSurpriseEmoji(emojis) {
+    const container = document.getElementById('randomKissesContainer');
+    if (!container) return;
+
+    const emoji = document.createElement('div');
+    emoji.className = 'surprise-emoji';
+    emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+
+    const x = Math.random() * (window.innerWidth - 100) + 50;
+    const y = Math.random() * (window.innerHeight - 200) + 100;
+
+    emoji.style.left = x + 'px';
+    emoji.style.top = y + 'px';
+    emoji.style.position = 'fixed';
+    emoji.style.fontSize = (Math.random() * 2 + 1.5) + 'rem';
+    emoji.style.pointerEvents = 'none';
+    emoji.style.zIndex = '55';
+    emoji.style.animation = 'surpriseEmojiFloat 4s ease-out forwards';
+
+    container.appendChild(emoji);
+
+    setTimeout(() => {
+        emoji.remove();
+    }, 4000);
+}
+
+// Particle Trails on Mouse/Touch Move
+function enableParticleTrails() {
+    particleTrailActive = true;
+
+    document.addEventListener('mousemove', createParticleTrail);
+    document.addEventListener('touchmove', (e) => {
+        const touch = e.touches[0];
+        createParticleTrail({
+            clientX: touch.clientX,
+            clientY: touch.clientY
+        });
+    });
+}
+
+function createParticleTrail(event) {
+    if (!particleTrailActive || currentSection === 'oopsPage') return;
+
+    // Only create particles occasionally to avoid performance issues
+    if (Math.random() > 0.9) {
+        const particle = document.createElement('div');
+        particle.className = 'love-particle';
+        particle.innerHTML = '✨';
+        particle.style.position = 'fixed';
+        particle.style.left = event.clientX + 'px';
+        particle.style.top = event.clientY + 'px';
+        particle.style.fontSize = '0.8rem';
+        particle.style.pointerEvents = 'none';
+        particle.style.zIndex = '45';
+        particle.style.animation = 'particleFade 1s ease-out forwards';
+
+        document.body.appendChild(particle);
+
+        setTimeout(() => {
+            particle.remove();
+        }, 1000);
+    }
+}
+
+// Heart Rain Effect
+function triggerHeartRain() {
+    if (heartRainActive) return;
+
+    heartRainActive = true;
+    const container = document.getElementById('randomKissesContainer');
+    if (!container) return;
+
+    for (let i = 0; i < 50; i++) {
+        setTimeout(() => {
+            const heart = document.createElement('div');
+            heart.className = 'heart-rain';
+            heart.innerHTML = '❤️';
+
+            const x = Math.random() * window.innerWidth;
+            heart.style.left = x + 'px';
+            heart.style.top = '-50px';
+            heart.style.position = 'fixed';
+            heart.style.fontSize = (Math.random() * 2 + 1) + 'rem';
+            heart.style.pointerEvents = 'none';
+            heart.style.zIndex = '65';
+            heart.style.animation = `heartRainFall ${Math.random() * 3 + 2}s linear forwards`;
+
+            container.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 5000);
+        }, i * 100);
+    }
+
+    setTimeout(() => {
+        heartRainActive = false;
+    }, 6000);
+}
+
+// Global Click Handler
+function handleGlobalClick(event) {
+    // Increment love counter
+    loveCounter++;
+
+    // Every 10 clicks, trigger something special
+    if (loveCounter % 10 === 0) {
+        triggerSpecialEffect(event);
+    }
+
+    // Small chance for heart explosion
+    if (Math.random() > 0.95) {
+        createClickHeartExplosion(event.clientX, event.clientY);
+    }
+}
+
+function triggerSpecialEffect(event) {
+    const effects = [
+        () => triggerHeartRain(),
+        () => createFireworks(event.clientX, event.clientY),
+        () => createLoveBurst(event.clientX, event.clientY),
+        () => showFloatingMessage(event.clientX, event.clientY, "You're amazing! 💕")
+    ];
+
+    const effect = effects[Math.floor(Math.random() * effects.length)];
+    effect();
+}
+
+function createClickHeartExplosion(x, y) {
+    const container = document.getElementById('randomKissesContainer');
+    if (!container) return;
+
+    for (let i = 0; i < 12; i++) {
+        const heart = document.createElement('div');
+        heart.innerHTML = '💕';
+        heart.style.position = 'fixed';
+        heart.style.left = x + 'px';
+        heart.style.top = y + 'px';
+        heart.style.fontSize = '1rem';
+        heart.style.pointerEvents = 'none';
+        heart.style.zIndex = '70';
+
+        const angle = (i / 12) * Math.PI * 2;
+        const distance = Math.random() * 100 + 50;
+        const dx = Math.cos(angle) * distance;
+        const dy = Math.sin(angle) * distance;
+
+        heart.style.animation = `heartExplode 1s ease-out forwards`;
+        heart.style.setProperty('--dx', dx + 'px');
+        heart.style.setProperty('--dy', dy + 'px');
+
+        container.appendChild(heart);
+
+        setTimeout(() => {
+            heart.remove();
+        }, 1000);
+    }
+}
+
+function createFireworks(x, y) {
+    const colors = ['#FF69B4', '#FF1493', '#FFD700', '#FFB6C1', '#FFC0CB'];
+    const container = document.getElementById('randomKissesContainer');
+    if (!container) return;
+
+    for (let i = 0; i < 20; i++) {
+        const particle = document.createElement('div');
+        particle.style.position = 'fixed';
+        particle.style.left = x + 'px';
+        particle.style.top = y + 'px';
+        particle.style.width = '6px';
+        particle.style.height = '6px';
+        particle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        particle.style.borderRadius = '50%';
+        particle.style.pointerEvents = 'none';
+        particle.style.zIndex = '75';
+
+        const angle = (i / 20) * Math.PI * 2;
+        const distance = Math.random() * 150 + 100;
+        const dx = Math.cos(angle) * distance;
+        const dy = Math.sin(angle) * distance;
+
+        particle.style.animation = `fireworkParticle 1.5s ease-out forwards`;
+        particle.style.setProperty('--dx', dx + 'px');
+        particle.style.setProperty('--dy', dy + 'px');
+
+        container.appendChild(particle);
+
+        setTimeout(() => {
+            particle.remove();
+        }, 1500);
+    }
+}
+
+function createLoveBurst(x, y) {
+    const loveEmojis = ['💕', '💖', '💗', '💝', '💓', '❤️'];
+    const container = document.getElementById('randomKissesContainer');
+    if (!container) return;
+
+    for (let i = 0; i < 8; i++) {
+        const emoji = document.createElement('div');
+        emoji.innerHTML = loveEmojis[Math.floor(Math.random() * loveEmojis.length)];
+        emoji.style.position = 'fixed';
+        emoji.style.left = x + 'px';
+        emoji.style.top = y + 'px';
+        emoji.style.fontSize = '1.5rem';
+        emoji.style.pointerEvents = 'none';
+        emoji.style.zIndex = '70';
+
+        const angle = (i / 8) * Math.PI * 2;
+        const distance = Math.random() * 80 + 40;
+        const dx = Math.cos(angle) * distance;
+        const dy = Math.sin(angle) * distance;
+
+        emoji.style.animation = `loveBurstFloat 1.2s ease-out forwards`;
+        emoji.style.setProperty('--dx', dx + 'px');
+        emoji.style.setProperty('--dy', dy + 'px');
+
+        container.appendChild(emoji);
+
+        setTimeout(() => {
+            emoji.remove();
+        }, 1200);
+    }
+}
+
+function showFloatingMessage(x, y, message) {
+    const msg = document.createElement('div');
+    msg.textContent = message;
+    msg.style.position = 'fixed';
+    msg.style.left = x + 'px';
+    msg.style.top = (y - 50) + 'px';
+    msg.style.color = '#FFD700';
+    msg.style.fontSize = '1.3rem';
+    msg.style.fontWeight = 'bold';
+    msg.style.textShadow = '2px 2px 4px rgba(0,0,0,0.8)';
+    msg.style.pointerEvents = 'none';
+    msg.style.zIndex = '80';
+    msg.style.transform = 'translateX(-50%)';
+    msg.style.animation = 'floatingMessageShow 2s ease-out forwards';
+
+    document.body.appendChild(msg);
+
+    setTimeout(() => {
+        msg.remove();
+    }, 2000);
+}
+
+// Double Click Easter Egg
+function handleDoubleClick(event) {
+    if (easterEggTriggered) return;
+
+    // Check if double-clicking on Slyy's name
+    if (event.target.classList.contains('her-name') || event.target.closest('.name-display')) {
+        triggerEasterEgg(event);
+        easterEggTriggered = true;
+    }
+}
+
+function triggerEasterEgg(event) {
+    showFloatingMessage(event.clientX, event.clientY, "You found my secret! 💕 I love you infinity! ♾️");
+
+    // Create extra special heart explosion
+    for (let i = 0; i < 3; i++) {
+        setTimeout(() => {
+            createClickHeartExplosion(
+                event.clientX + (Math.random() - 0.5) * 200,
+                event.clientY + (Math.random() - 0.5) * 200
+            );
+        }, i * 200);
+    }
+
+    // Trigger heart rain
+    setTimeout(() => {
+        triggerHeartRain();
+    }, 1000);
+}
+
+// Interactive Hover Effects
+function addInteractiveHoverEffects() {
+    // Add hover effects to all interactive elements
+    const interactiveElements = document.querySelectorAll('button, .reason-card, .mystery-box');
+
+    interactiveElements.forEach(element => {
+        element.addEventListener('mouseenter', (e) => {
+            if (Math.random() > 0.7) {
+                createHoverSparkles(e.target);
+            }
+        });
+
+        element.addEventListener('touchstart', (e) => {
+            if (Math.random() > 0.7) {
+                createHoverSparkles(e.target);
+            }
+        });
+    });
+}
+
+function createHoverSparkles(element) {
+    const rect = element.getBoundingClientRect();
+    const container = document.getElementById('randomKissesContainer');
+    if (!container) return;
+
+    for (let i = 0; i < 5; i++) {
+        const sparkle = document.createElement('div');
+        sparkle.innerHTML = '✨';
+        sparkle.style.position = 'fixed';
+        sparkle.style.left = (rect.left + Math.random() * rect.width) + 'px';
+        sparkle.style.top = (rect.top + Math.random() * rect.height) + 'px';
+        sparkle.style.fontSize = '0.8rem';
+        sparkle.style.pointerEvents = 'none';
+        sparkle.style.zIndex = '50';
+        sparkle.style.animation = 'hoverSparkle 1s ease-out forwards';
+
+        container.appendChild(sparkle);
+
+        setTimeout(() => {
+            sparkle.remove();
+        }, 1000);
+    }
+}
+
+// Enhanced Photo Gallery Interactions
+function enhancePhotoGallery() {
+    const photos = document.querySelectorAll('.photo-slide img');
+
+    photos.forEach(photo => {
+        photo.addEventListener('click', (e) => {
+            createClickHeartExplosion(e.clientX, e.clientY);
+            showFloatingMessage(e.clientX, e.clientY, "Beautiful memory! 💕");
+        });
+
+        photo.addEventListener('mouseenter', (e) => {
+            if (Math.random() > 0.5) {
+                createHoverSparkles(e.target);
+            }
+        });
+    });
+}
+
+// Call enhancement when photo gallery is loaded
+const originalLoadGalleryImages = loadGalleryImages;
+loadGalleryImages = function() {
+    originalLoadGalleryImages.call(this);
+    setTimeout(enhancePhotoGallery, 1000);
+};
+
+// Add CSS animations dynamically
+const additionalCSS = `
+@keyframes surpriseEmojiFloat {
+    0% {
+        transform: scale(0) rotate(0deg);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.5) rotate(180deg);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(0.8) rotate(360deg) translateY(-50px);
+        opacity: 0;
+    }
+}
+
+@keyframes particleFade {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(0);
+        opacity: 0;
+    }
+}
+
+@keyframes heartRainFall {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0.8;
+    }
+}
+
+@keyframes heartExplode {
+    0% {
+        transform: translate(0, 0) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(var(--dx), var(--dy)) scale(0);
+        opacity: 0;
+    }
+}
+
+@keyframes fireworkParticle {
+    0% {
+        transform: translate(0, 0) scale(1);
+        opacity: 1;
+    }
+    70% {
+        opacity: 1;
+    }
+    100% {
+        transform: translate(var(--dx), var(--dy)) scale(0);
+        opacity: 0;
+    }
+}
+
+@keyframes loveBurstFloat {
+    0% {
+        transform: translate(0, 0) scale(0);
+        opacity: 1;
+    }
+    50% {
+        transform: translate(var(--dx), var(--dy)) scale(1.5);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(calc(var(--dx) * 1.5), calc(var(--dy) * 1.5)) scale(0.5);
+        opacity: 0;
+    }
+}
+
+@keyframes floatingMessageShow {
+    0% {
+        transform: translateX(-50%) translateY(0) scale(0);
+        opacity: 0;
+    }
+    20% {
+        transform: translateX(-50%) translateY(-20px) scale(1.2);
+        opacity: 1;
+    }
+    80% {
+        transform: translateX(-50%) translateY(-30px) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(-50%) translateY(-50px) scale(0.8);
+        opacity: 0;
+    }
+}
+
+@keyframes hoverSparkle {
+    0% {
+        transform: translateY(0) scale(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-30px) scale(1);
+        opacity: 0;
+    }
+}
+
+.floating-love-message {
+    background: rgba(255, 105, 180, 0.2);
+    backdrop-filter: blur(5px);
+    padding: 8px 16px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.surprise-emoji {
+    filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.6));
+}
+
+.heart-rain {
+    filter: drop-shadow(0 0 8px rgba(255, 20, 147, 0.8));
+}
+
+.love-particle {
+    filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.8));
+}
+`;
+
+// Add the new CSS to the page
+const styleSheet = document.createElement('style');
+styleSheet.textContent = additionalCSS;
+document.head.appendChild(styleSheet);
+
 // Service worker registration for better performance (optional)
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
