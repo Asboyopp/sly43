@@ -66,6 +66,7 @@ The website is specifically designed for mobile viewing:
 - Personalized nickname display with sparkle effects
 - Romantic letter with your exact words
 - "Begin Your Love Story" button that starts the music
+- **Double-click Slyy's name** for secret easter egg!
 
 ### Love Reasons
 - 100+ romantic reasons with the first 3 exactly as specified:
@@ -74,12 +75,14 @@ The website is specifically designed for mobile viewing:
   - "Looking at Your Pics pleases my eyes🥰"
 - Tap any reason to watch it explode into floating hearts
 - New reasons automatically appear to replace clicked ones
+- **Hover effects** with random sparkles
 
 ### Photo Gallery
-- Automatically loads images from `assets/` folder
+- Automatically loads sample images + your personal images from `assets/` folder
 - Touch-enabled swipe navigation
 - Previous/Next buttons with heart icons
-- Beautiful fallback if no images are uploaded yet
+- **Click photos** for heart explosions and "Beautiful memory! 💕" messages
+- Enhanced hover effects with sparkles
 
 ### Mystery Box
 - Animated gift box with pulsing glow effect
@@ -92,6 +95,33 @@ The website is specifically designed for mobile viewing:
 - Tap anywhere on kiss canvas to leave kiss marks
 - Swipe to create kiss trails
 - Different kiss emojis and animations
+
+## 🎮 **How to Trigger Special Effects**
+
+### **Click Interactions**
+- **Click anywhere**: Increments love counter, occasional heart explosions
+- **Every 10 clicks**: Random special effect (heart rain, fireworks, love burst, floating message)
+- **5% chance**: Random heart explosion at any click
+
+### **Mouse/Touch Movement**
+- **Move mouse/finger**: Leaves magical sparkle particle trail
+- **Enabled after 15 seconds**: Performance optimized particle effects
+
+### **Hidden Easter Eggs**
+- **Double-click "Slyy" name**: Secret message + massive heart explosion + heart rain
+- **Can only trigger once**: Special surprise hidden for her to discover
+
+### **Timed Animations**
+- **0s**: Background hearts and sparkles start
+- **5s**: Random kiss animations begin
+- **8s**: Floating love messages start appearing
+- **12s**: Surprise emojis begin raining down
+- **15s**: Particle trails enable
+
+### **Interactive Elements**
+- **Hover over buttons/cards**: Random sparkle effects
+- **Touch buttons on mobile**: Same sparkle effects
+- **All elements are touch-optimized** for mobile experience
 
 ## 🎵 Music & Audio
 
