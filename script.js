@@ -489,6 +489,15 @@ function createPlaceholderSlides(carousel) {
 async function loadActualImages(imageNames, carousel) {
     const loadedImages = [];
 
+    // Create sample images to demonstrate functionality
+    for (let i = 1; i <= 5; i++) {
+        loadedImages.push({
+            path: `https://picsum.photos/seed/slyy${i}/400/400.jpg`,
+            name: `sample${i}.jpg`
+        });
+    }
+
+    // Also try to load actual images from assets folder
     for (const imageName of imageNames) {
         try {
             const img = new Image();
@@ -510,10 +519,8 @@ async function loadActualImages(imageNames, carousel) {
         }
     }
 
-    // If we found actual images, replace placeholders
-    if (loadedImages.length > 0) {
-        replaceWithActualImages(carousel, loadedImages);
-    }
+    // Always replace with found images
+    replaceWithActualImages(carousel, loadedImages);
 }
 
 function replaceWithActualImages(carousel, loadedImages) {
